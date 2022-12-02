@@ -12,5 +12,4 @@ with open("calories", "r") as c:
         elif cal == "\n":
             sum = 0
 
-print(highest_index)
 print(highest_val)
