@@ -31,10 +31,12 @@ def filter_input(input):
 
 def execute_instructions(stacks, instructions):
     for ins in instructions:
+
+        moving_objs = stacks[ins[1] - 1][len(stacks[ins[1] - 1]) - ins[0]:]
         for _ in range(ins[0]):
-            moving_obj = stacks[ins[1] - 1][-1]
             stacks[ins[1] - 1].pop()
-            stacks[ins[2] - 1].append(moving_obj)
+        stacks[ins[2] - 1].extend(moving_objs)
+
     res = ""
     for s in stacks:
         res += s[-1]
