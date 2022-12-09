@@ -1,11 +1,11 @@
+import random
+
 def get_sum_of_subdir(tree, i):
     numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     dir_size = 0
     i += 1
     l = tree[i]
-    while l[0] != "$" and not i == len(tree) - 1:
-        l = tree[i]
-        print(l)
+    while not l[0] == "$" and not i == (len(tree) - 1):
         if l[0] in numbers:
             dir_size += int(l.split(" ")[0])
         if l.startswith("dir "):
@@ -14,6 +14,8 @@ def get_sum_of_subdir(tree, i):
             dir_size += get_sum_of_subdir(tree, dir_i)
         if i < len(tree) - 1:
             i += 1
+            l = tree[i]
+
     if dir_size <= 100000:
         return dir_size
     return 0
@@ -33,6 +35,8 @@ with open("input", "r") as d:
     tree = []
     files_size_sum_folders_under_100000 = 0
     for inp in d.readlines():
+        if inp in tree:
+            inp += str(random.randrange(1, 10000))
         tree.append(inp)
     files_size_sum_folders_under_100000 = get_file_sum_under_100000(tree)
 

@@ -1,26 +1,29 @@
 def is_visible(forest, i, j):
-    left_view = True
-    right_view = True
-    top_view = True
-    bottom_view = True
+
+    last_left = i
+    last_right = len(forest) - 1 - i
+    last_top = j
+    last_bottom = len(forest[i]) - 1 - j
 
     for left in range(0, i):
         if forest[left][j] >= forest[i][j]:
-            left_view = False
-            break
+            last_left = i - left
+
     for right in range(i + 1, len(forest)):
         if forest[right][j] >= forest[i][j]:
-            right_view = False
+            last_right = i - right
             break
+
     for top in range(0, j):
         if forest[i][top] >= forest[i][j]:
-            top_view = False
-            break
+            last_top = top - j
+
     for bottom in range(j + 1, len(forest[i])):
         if forest[i][bottom] >= forest[i][j]:
-            bottom_view = False
+            last_bottom = bottom - j
             break
-    return left_view or right_view or top_view or bottom_view
+
+    return last_left * last_right * last_top * last_bottom
 
 
 forest = []
@@ -32,12 +35,12 @@ with open("input", "r") as d:
                 tress_row.append(tree)
         forest.append(tress_row)
 
-visible_ctr = 0
-
+high_score = 0
 for i, trees_row in enumerate(forest):
     visible_row = []
     for j, tree in enumerate(trees_row):
-        if is_visible(forest, i, j):
-            visible_ctr += 1
+        score = is_visible(forest, i, j)
+        if score > high_score:
+            high_score = score
 
-print(visible_ctr)
+print(high_score)
