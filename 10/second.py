@@ -1,29 +1,21 @@
-def get_summed_cycle_strength(input):
+def draw_crt(input):
 
-    cycle_measure_numbers = [20, 60, 100, 140, 180, 220]
-    x = 1
-    res = 0
     round = 0
-    num = 0
+    crt_line = ""
+    sprite_pos = 0
+    crt_pos = 0
 
-    for inp in input:
-        num += 1
-        round += 1
+    for cycle, height in input:
+        if cycle % 40 == 0:
+            print("\n")
+            crt_line = ""
 
-        if round in cycle_measure_numbers:
-            res += x * round
-            print("Cycle measure number! ", round, x, x * round, res)
+        # Start
 
-        if inp != 0:
-            round += 1
 
-            if round in cycle_measure_numbers:
-                res += x * round
-                print("Cycle measure number! ", round, x, x * round, res)
+        # During
 
-            x += inp
-
-    return res
+        # End
 
 
 input = []
@@ -34,4 +26,4 @@ with open("input", "r") as d:
         else:
             input.append(0)
 
-print(get_summed_cycle_strength(input))
+draw_crt(input)
