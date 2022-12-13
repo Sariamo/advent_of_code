@@ -4,10 +4,8 @@ def get_summed_cycle_strength(input):
     x = 1
     res = 0
     round = 0
-    num = 0
 
     for inp in input:
-        num += 1
         round += 1
 
         if round in cycle_measure_numbers:
