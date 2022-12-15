@@ -1,34 +1,35 @@
 def fall(input):
-    x_offset = 463
+    y_offset = 464
     fall_ctr = 0
-    x_pos = 500 - x_offset
+    y_pos = 500 - y_offset
     while True:
+        print(fall_ctr, y_pos)
 
-        if input[fall_ctr][x_pos] == '.':
-            input[fall_ctr][x_pos] = '+'
+        if input[fall_ctr][y_pos] == '.':
+            input[fall_ctr][y_pos] = '+'
             if fall_ctr > 0:
-                input[fall_ctr - 1][x_pos] = '.'
+                input[fall_ctr - 1][y_pos] = '.'
             fall_ctr += 1
             continue
 
-        if input[fall_ctr][x_pos] == '#' or input[fall_ctr][x_pos] == '+':
+        if input[fall_ctr][y_pos] == '#' or input[fall_ctr][y_pos] == '+':
 
-            if input[fall_ctr][x_pos - 1] == '.':
-                x_pos -= 1
-                input[fall_ctr][x_pos - 1] = '+'
-                input[fall_ctr - 1][x_pos] = "."
+            if input[fall_ctr][y_pos - 1] == '.':
+                y_pos -= 1
+                input[fall_ctr][y_pos] = '+'
+                input[fall_ctr - 1][y_pos] = "."
                 fall_ctr += 1
                 continue
 
-            elif input[fall_ctr][x_pos + 1] == '.':
-                x_pos += 1
-                input[fall_ctr][x_pos + 1] = '+'
-                input[fall_ctr - 1][x_pos] = "."
+            elif input[fall_ctr][y_pos + 1] == '.':
+                y_pos += 1
+                input[fall_ctr][y_pos] = '+'
+                input[fall_ctr - 1][y_pos] = "."
                 fall_ctr += 1
                 continue
 
             else:
-                input[fall_ctr - 1][x_pos] = '+'
+                input[fall_ctr - 1][y_pos] = '+'
                 break
 
     return input
@@ -37,7 +38,7 @@ def fall(input):
 def get_first_one_to_fall_out(input):
 
     sand_count = 0
-    while True:
+    for _ in range(15):
         input = fall(input)
 
         for inp in input:
