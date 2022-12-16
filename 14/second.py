@@ -1,5 +1,5 @@
 def fall(input):
-    y_offset = 462
+    y_offset = 262
     fall_ctr = 0
     y_pos = 500 - y_offset
     while True:
@@ -35,20 +35,15 @@ def fall(input):
 
 
 def get_first_one_to_fall_out(input):
-    for i, inp in enumerate(input):
-        print(str(i % 10) + str(inp).replace("'", "").replace("[", "").replace("]", "").replace(",", ""))
-
     sand_count = 0
-    while True:
-        input = fall(input)
+    while "°" not in input[0]:
 
-        print(" " + str([str((i + 2) % 10) for i in range(73)]).replace(",", "").replace("[", "").replace("]", "").replace("'", ""))
-        for i, inp in enumerate(input):
-            print(str(i % 10) + str(inp).replace("'", "").replace("[", "").replace("]", "").replace(",", ""))
-        print()
+        input = fall(input)
         sand_count += 1
         print(sand_count)
         print(str([[rock for rock in rocks] for rocks in rock_matrix]).count("°"))
+    print(sand_count)
+    print(str([[rock for rock in rocks] for rocks in rock_matrix]).count("°"))
 
 
 def convert_to_matrix(rocks):
@@ -69,6 +64,8 @@ def convert_to_matrix(rocks):
             if highest_value_y is None or rock[1] > highest_value_y:
                 highest_value_y = rock[1]
 
+    lowest_value_x -= 200
+    highest_value_x += 200
     x_range = highest_value_x - lowest_value_x + 1
     y_range = highest_value_y - lowest_value_y + 1
 
@@ -96,6 +93,8 @@ def convert_to_matrix(rocks):
 
     for _ in range(lowest_value_y):
         rock_matrix.insert(0, ["." for _ in range(x_range)])
+    rock_matrix.insert(len(rock_matrix), ["." for _ in range(x_range)])
+    rock_matrix.insert(len(rock_matrix), ["#" for _ in range(x_range)])
     return rock_matrix
 
 
